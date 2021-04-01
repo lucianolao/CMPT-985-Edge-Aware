@@ -1,27 +1,19 @@
 function [Hh] = kernelH(I, W, alpha, sigma)
 
-height = size(I,1);
-width = size(I,2);
+height = size(I,1) - W*2;
+width = size(I,2) - W*2;
 
 kernel_size = W*2+1;
 
 kernel = zeros(kernel_size, 1);
 Hh = zeros(height, width, size(kernel,1));
 
-for i = 1:height
-    for p = 1:width % p
-        k = 0;
-        for kernel_range = -W:W
-            k = k+1;
-            q = p+kernel_range;
-            if q < 1 || q > width
-                kernel(k) = 0;
-            else
-                kernel(k) = permeability(I(i,p,:), I(i,q,:), alpha, sigma);
-            end
-        end
-        kernel = kernel / sum(kernel);
-        Hh(i,p,:) = kernel;
+kernel_range = -W:W;
+
+for i = 1+W : height+W
+    for p = 1+W : width+W % p
+        q = p+kernel_range;
+        Hh(i,p,:) = permeability(I(i,p,:), I(i,q,:), q, alpha, sigma, W, width);
     end
 end
 
