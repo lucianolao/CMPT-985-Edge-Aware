@@ -16,9 +16,12 @@ low = im2double(imread(folder_1 + 'low.jpg'));
 
 tic
 
-I = edgeAware(high, 3, lambda, W, alpha, sigma);
-% I = edgeAware(low, 1, lambda, W, alpha, sigma);
+% input = high;
+input = low;
+
+I = edgeAware(input, 1, lambda, W, alpha, sigma);
 
 toc
 
-imshow([high I]);
+imshow([input I]);
+% imshow([input imbilatfilt(input)]);
