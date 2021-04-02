@@ -19,10 +19,10 @@ kernel_range = -W:W;
 for i = 1+W : height+W
     for p = 1+W : width+W % p
         q = p+kernel_range;
-        Hh(i-W,p-W,:) = permeability(I(i,p,:), I(i,q,:), q, alpha, sigma, W, width);
+        Hh(i-W,p-W,:) = permeability(I(i,p,:), I(i,q,:), q, alpha, sigma, W, width+W);
         
         % channels
-%         Hh(i-W,p-W,:,1:ch) = permeability(I(i,p,:), I(i,q,:), q, alpha, sigma, W, width);
+%         Hh(i-W,p-W,:,1:ch) = permeability(I(i,p,:), I(i,q,:), q, alpha, sigma, W, width+W);
     end
 end
 

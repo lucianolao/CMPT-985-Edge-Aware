@@ -2,6 +2,7 @@ function [pi] = permeability(Ip, Iq, q, alpha, sigma, W, border)
     
     if ndims(Iq) == 2
         pi = 1 + ( (Ip-Iq).^alpha / sigma^alpha );
+        % pi = 1 + (abs(Ip-Iq) ./ sigma ).^alpha;
         
         pi = 1./pi;
         pi(q<=W) = 0;
