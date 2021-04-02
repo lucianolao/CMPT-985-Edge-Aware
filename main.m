@@ -23,3 +23,4 @@ toc
 
 imshow([input I]);
 % imshow([input imbilatfilt(input)]);
+% imwrite(I, "z10_rgb.jpg");

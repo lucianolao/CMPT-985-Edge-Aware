@@ -10,9 +10,9 @@ ch = ndims(I);
 I = padarray(I,[W W]);
 J = I;
 
-G = rgb2gray(I);
-[Hh] = kernelH(G, W, alpha, sigma);
-[Hv] = kernelV(G, W, alpha, sigma);
+% G = rgb2gray(I);
+[Hh] = kernelH(I, W, alpha, sigma);
+[Hv] = kernelV(I, W, alpha, sigma);
 
 % channels
 % [Hh] = kernelH(I, W, alpha, sigma);
@@ -45,8 +45,9 @@ for iter = 1:n_iterations
             
             % channels
 %             h = reshape(Hh(i-W,p-W,:,1:ch), [1 kernel_size ch 1]) .* J(i,q,:);
-%             h = sum(h,2);
-%             Jnew(i,p,:) = h + lambda .* (I(i,p,:) - J(i,p,:));
+%             h2 = sum(h,2);
+%             hpp = h(1,W+1,:);
+%             Jnew(i,p,:) = h2 + lambda.*hpp .* (I(i,p,:) - J(i,p,:));
         end
     end
     J = Jnew;
@@ -77,12 +78,12 @@ for iter = 1:n_iterations
             
             % channels
 %             h = reshape(Hv(p-W,j-W,:,1:ch), [kernel_size 1 ch 1]) .* J(q,j,:);
-%             h = sum(h,1);
-%             Jnew(p,j,:) = h + lambda .* (I(p,j,:) - J(p,j,:));
+%             h2 = sum(h,1);
+%             hpp = h(W+1,1,:);
+%             Jnew(p,j,:) = h2 + lambda.*hpp .* (I(p,j,:) - J(p,j,:));
         end
     end
     J = Jnew;
-
     
 end
 
