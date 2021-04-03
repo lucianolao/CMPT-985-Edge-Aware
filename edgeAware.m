@@ -1,4 +1,16 @@
-function [J] = edgeAware(I, n_iterations, lambda, W, alpha, sigma)
+function [J] = edgeAware(I, n_iterations, lambda, W, alpha, sigma, guide)
+
+if nargin == 6
+    guide = I;
+    disp("Edge-Aware filtering...");
+elseif nargin == 7
+    if size(I,1) ~= size(guide,1) || size(I,2) ~= size(guide,2)
+        guide = imresize(guide,[size(I,1) size(I,2)]);
+    end
+    disp("Cross filtering...");
+else
+    error("Invalid number of parameters");
+end
 
 height = size(I,1);
 width = size(I,2);
@@ -9,10 +21,11 @@ ch = ndims(I);
 
 I = padarray(I,[W W]);
 J = I;
+guide = padarray(guide,[W W]);
 
 % G = rgb2gray(I);
-[Hh] = kernelH(I, W, alpha, sigma);
-[Hv] = kernelV(I, W, alpha, sigma);
+[Hh] = kernelH(guide, W, alpha, sigma);
+[Hv] = kernelV(guide, W, alpha, sigma);
 
 % channels
 % [Hh] = kernelH(I, W, alpha, sigma);
