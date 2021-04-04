@@ -14,9 +14,8 @@ folder_3 = "results/";
 
 high = im2double(imread(folder_1 + 'high.jpg'));
 low = im2double(imread(folder_1 + 'low.jpg'));
-lena = im2double(imread('../lena.jpg'));
 
-input = low;
+input = high;
 
 tic
 I = edgeAware(input, 2, lambda, W, alpha, sigma);
