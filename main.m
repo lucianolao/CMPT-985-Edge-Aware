@@ -18,15 +18,14 @@ lena = im2double(imread('../lena.jpg'));
 
 input = low;
 
-% tic
-% I = edgeAware(input, 1, lambda, W, alpha, sigma);
-% toc
+tic
+I = edgeAware(input, 2, lambda, W, alpha, sigma);
+toc
 
-% imshow([input I]);
-% imshow([input imbilatfilt(input)]);
-% imwrite(I, folder_3 + "p1/low_3c.jpg");
+imshow([input I]);
+% imwrite(I, folder_3 + "p1/high_3cbZ.jpg");
 
-pair_number = 2; % 1-5
+pair_number = 4; % 1-5
 
 if pair_number == 1
     flash = im2double(imread(folder_2 + 'carpet_00_flash.jpg'));
@@ -34,10 +33,6 @@ if pair_number == 1
 elseif pair_number == 2
     flash = im2double(imread(folder_2 + 'cave01_00_flash.jpg'));
     no_flash = im2double(imread(folder_2 + 'cave01_01_noflash.jpg'));
-    lambda = 3;
-    W = 10;
-    alpha = 2;
-    sigma = 0.1;
 elseif pair_number == 3
     flash = im2double(imread(folder_2 + 'lamp_00_flash.jpg'));
     no_flash = im2double(imread(folder_2 + 'lamp_01_noflash.jpg'));
@@ -54,16 +49,28 @@ end
 input = low;
 guide = high;
 
-lambda = 3; % 0.1, 1, 10
-W = 10; % 5, 10, 20
+lambda = 1;
+W = 10;
 alpha = 2;
-sigma = 0.1;
+sigma = 0.005;
 
 tic
-I = edgeAware(no_flash, 5, lambda, W, alpha, sigma);
-% I = edgeAware(no_flash, 5, lambda, W, alpha, sigma, flash);
+% lambda = 5; W = 10; alpha = 2; sigma = 0.1; % a,d,e
+% lambda = 3; W = 10; alpha = 2; sigma = 0.1; % b,c
+% I = edgeAware(no_flash, 5, lambda, W, alpha, sigma);
+% imwrite(I, folder_3 + "p2/d2_itselfZ.jpg");
+
+% lambda = 1; W = 10; alpha = 2; sigma = 0.005; % a,d,e (p3)
+% lambda = 0.1; W = 10; alpha = 2; sigma = 0.005; % b
+% lambda = 2; W = 10; alpha = 2; sigma = 0.005; % c
+% I = cross(no_flash, 5, lambda, W, alpha, sigma, flash);
+% imwrite(I, folder_3 + "p2/e1_cross.jpg");
 toc
 
-imshow([no_flash I]);
-imwrite(I, folder_3 + "p2/b1_crossZZZ.jpg");
+% imshow([no_flash I]);
 
+% tic
+% lambda = 1; W = 10; alpha = 2; sigma = 0.005;
+% I = cross(low, 5, lambda, W, alpha, sigma, high);
+% imwrite(I, folder_3 + "p3/1Z.jpg");
+% toc
