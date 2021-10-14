@@ -1,4 +1,4 @@
-# CMPT-985-A3
+# CMPT-985-Edge-Aware
 
 ## Edge-Aware Filtering
 
