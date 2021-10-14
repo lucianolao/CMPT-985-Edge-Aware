@@ -1,6 +1,4 @@
-# CMPT-985-Edge-Aware
-
-## Edge-Aware Filtering
+# CMPT-985-Edge-Aware-Filtering
 
 ### Temporally Coherent Local Tone Mapping of HDR Video
 http://zurich.disneyresearch.com/~taydin/_resources/publication/vtm.pdf
